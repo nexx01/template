@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    config:
+      enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://127.0.0.1:8761/eureka}
+
+service-b:
+  url: http://127.0.0.1:8084
+
+hystrix:
+  threadpool:
+    default: 50
+    maxQueueSize: 100
+    queueSizeRejectionThreshold: 50
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 210000

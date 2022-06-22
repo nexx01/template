@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: ${PORT:8761}  #имя порта для сервера
+
+eureka:
+ #  shouldOnDemandUpdateStatusChange: false #Если у вас на клиенте есть собственная клиентская конфигурация, то на стороне сервера eureka установите для обновления по требованию значение в false
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/ #если параметр shouldUseDns имеет значение false, мы будем использовать следующие свойства для явного указания маршрута к серверам eureka
+      healthcheck:
+        enabled: true #после успешной регистрации Eureka всегда объявляет, что приложение находится в состоянии «UP».  Это поведение можно изменить, включив проверки работоспособности Eureka.
+    shouldUseDns: false #поиск на основе DNS для определения других серверов eureka
+    registerWithEureka: false  #чтобы сервер Eureka не зарегистрировался сам собой
+    fetchRegistry: false   #чтобы клиент получал информацию из реестра eurika
+    eureka-server-connect-timeout-seconds: 60 # время ожидания (в секундах) до истечения тайм-аута соединения с Eureka Server
+    eureka-server-total-connections: 200  #общее количество подключений, разрешенных от клиента ко всем серверам,
+    eureka-server-total-connections-per-host: 50 #общее количество подключений, разрешенных от клиента к определенному серверу
+    eureka-service-url-poll-interval-seconds: 1 #как часто (в секундах) необходимо запрашивать изменения об информации с сервера. Серверы Eureka могут быть добавлены или удалены, и этот параметр определяет, как скоро клиенты Eureka должны узнать об этом.
+  instance:
+    hostname: my-eureka-server.com
+    lease-expiration-duration-in-seconds: 70 #Каждые .... секунд клиент шлет запрос на сервер и информирует сервер о том, что экземпляр еще жив. Если Eureka Server не видел обновления в течение ... секунд, он удаляет экземпляр из своего реестра.
+    statusPageUrl: https://${eureka.hostname}/info  #После успешной регистрации Eureka всегда объявляет, что приложение находится в состоянии «UP».
+    healthCheckUrl: https://${eureka.hostname}/health  #После успешной регистрации Eureka всегда объявляет, что приложение находится в состоянии «UP».
+    homePageUrl: https://${eureka.hostname}/ #После успешной регистрации Eureka всегда объявляет, что приложение находится в состоянии «UP».
+  server:
+    expected-client-Renewal-interval-seconds: 20 #время, по которому сервер будет ожидать эхо запрос от клиента о том что он жив (по умолчанию 30 секунд):
+

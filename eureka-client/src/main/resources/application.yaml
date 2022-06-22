@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: eureka-client
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://127.0.0.1:8761/eureka}
+  instance:
+    preferIpAddress: true
+    lease-renewal-interval-in-seconds: 30 #интервал в 35 сек через который клиент шлет эхо запрос на сервер
+
+

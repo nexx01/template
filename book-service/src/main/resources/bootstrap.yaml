@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: book-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/gallerydb
+
+server:
+  port: 8086
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+  instance:
+    preferIpAddress: true

@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: main
+  application:
+    name: service-b
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config-server
+
+server:
+  port: 8084

@@ -1,0 +1,36 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  profiles: native #профиль для того чтобы потом легко переключиться с одного способа хранения на другой. У нас указан по умолчанию профиль = native.
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://127.0.0.1:8761/eureka}
+
+---
+spring:
+  profiles: native #хранение может осуществляться локально (native) либо удаленно на Git (git).
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: /Users/iteco/Documents/ProjectsGPB/template/ms-config-properties/{application}/{profile} #принимает в качестве значения путь к папке, которая будет локальным хранилищем файлов свойств для каждого отдельного Config Client.
+#/home/ks/IdeaProjects/my-example - произвольный путь до папки с свойствами. На вашей локальной машине он может быть совсем другим
+#ms-config-properties - название папки, которая будет хранить файлы свойств для каждого отдельного клиента
+#{application} - название приложения. Должно совпадать с параметром name в файле свойств у клиента, который будет запрашивать конкретно этот файл свойств
+#{profile}- профиль приложения. dev, master или test.
+---
+spring:
+  profiles: git
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/myGitHub/my-example
+          search-paths:
+            - "ms-config-properties/{application}/{profile}"
+
