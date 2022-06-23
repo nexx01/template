@@ -15,4 +15,9 @@ public class RouteConfig {
         return route(GET("/api/perf"),controller::ping);
     }
 
+    @Bean
+    public RouterFunction<?> routerFunction1(HelloController controller) {
+        return route(GET("/api/perfHeavy"),controller::pingHeavy);
+    }
+
 }

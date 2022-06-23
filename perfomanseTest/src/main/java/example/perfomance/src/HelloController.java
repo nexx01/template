@@ -8,6 +8,8 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.time.Duration;
+
 @Component
 public class HelloController {
 
@@ -17,6 +19,14 @@ public class HelloController {
                 .body(fromObject("{\n" +
                         "  \"status\": \"ok\"\n" +
                         "}"));
+    }
+
+    public Mono<ServerResponse> pingHeavy(ServerRequest serverRequest) {
+        return ServerResponse.ok()
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(fromObject("{\n" +
+                        "  \"status\": \"ok\"\n" +
+                        "}")).delayElement(Duration.ofSeconds(29));
     }
 
 }
