@@ -26,7 +26,7 @@ public class TestService {
     }
 
     public List<Book> getAllBooksRestTemplate() {
-        List<Book> forObject = restTemplate.getForObject("http://localhost:8086/data", List.class);
+        List<Book> forObject = restTemplate.getForObject("http://book-service/data", List.class);
         log.info("{}",forObject);
         return forObject;
     }

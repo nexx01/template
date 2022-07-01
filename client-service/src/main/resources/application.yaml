@@ -1,2 +1,27 @@
+spring:
+   application:
+      name: book-client
+   cloud:
+      config:
+         discovery:
+            enabled: true
+            service-id: config-server
+
+#   data:
+#      mongodb:
+#         uri: mongodb://localhost:27017/gallerydb
+
 book-service:
-   url: http://localhost:8086
+  url: http://book-service/data
+
+server:
+   port: 8082
+#feign.hystrix.enabled: false
+eureka:
+   client:
+     fetch-registry: true
+     serviceUrl:
+         defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+   instance:
+      preferIpAddress: true
+      hostname: book-client
