@@ -14,7 +14,7 @@ eureka:
         enabled: true #после успешной регистрации Eureka всегда объявляет, что приложение находится в состоянии «UP».  Это поведение можно изменить, включив проверки работоспособности Eureka.
     shouldUseDns: false #поиск на основе DNS для определения других серверов eureka
     registerWithEureka: false  #чтобы сервер Eureka не зарегистрировался сам собой
-    fetchRegistry: false   #чтобы клиент получал информацию из реестра eurika
+    fetchRegistry: true   #чтобы клиент получал информацию из реестра eurika
     eureka-server-connect-timeout-seconds: 60 # время ожидания (в секундах) до истечения тайм-аута соединения с Eureka Server
     eureka-server-total-connections: 200  #общее количество подключений, разрешенных от клиента ко всем серверам,
     eureka-server-total-connections-per-host: 50 #общее количество подключений, разрешенных от клиента к определенному серверу

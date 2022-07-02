@@ -1,6 +1,9 @@
 spring:
   application:
     name: config-server
+  cloud:
+    config:
+      enabled: true
   profiles: native #профиль для того чтобы потом легко переключиться с одного способа хранения на другой. У нас указан по умолчанию профиль = native.
 
 eureka:

@@ -14,7 +14,9 @@ server:
 
 eureka:
   client:
+    registerWithEureka: true
     fetch-registry: true
+    fetchRegistry: true
     serviceUrl:
       defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
   instance:
@@ -27,7 +29,8 @@ zuul:
   routes:
     book-client:
       path: /client/**
-      service-id: BOOK-CLIENT
+      service-id: book-client
+  #    url: http://localhost:8082/
 
 # Increase the Hystrix timeout to 60s (globally)
 hystrix:
@@ -39,7 +42,12 @@ hystrix:
             timeoutInMilliseconds: 60000
 
 ribbon:
-  ReadTimeout=60000:
+  ReadTimeout: 60000
+  ConnectTimeout: 6000
+  eureka:
+    enabled: true   #important
+#ribbon:
+#  ReadTimeout=60000:
 
 #spring:   # for spring-gateway
 #  cloud:
